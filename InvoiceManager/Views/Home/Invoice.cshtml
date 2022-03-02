@@ -58,9 +58,7 @@
                    "----Wybierz sposób płatności----",
                    new
                    { 
-                    @class = "form-control",
-                    @id="PaymentDate",
-                    autocomplete="off"})
+                    @class = "form-control"})
                 </div>
 
                 <div class="form-group">
@@ -68,10 +66,7 @@
                     @Html.TextBoxFor(x => x.Invoice.PaymentDate, "{0:dd-MM-yyyy}",
                    new 
                    { 
-                       @class = "form-control", 
-                       @id="PaymentDate", 
-                       autocomplete="off" 
-                   })
+                       @class = "form-control" })
                 </div>
 
                 <div class="form-group">
@@ -102,9 +97,9 @@
 
         }
 
-        &(document).ready(function() {
-
-            $('#PaymentDate').datepicker({
+        $(document).ready(function(){
+            $('#PaymentDate').datepicker(
+                {
                 format: "dd-mm-yyyy",
                 language: "pl",
                 multidate: false,
