@@ -8,12 +8,12 @@ namespace InvoiceManager.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("DefaultConnection", throwIfV1Schema: true)
         {
         }
 
         public DbSet<Address>  Addresses { get; set; }
-        //public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        
         public DbSet<Client> Clients { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<InvoicePosition> InvoicePositions { get; set; }

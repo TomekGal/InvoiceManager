@@ -9,6 +9,7 @@ namespace InvoiceManager
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+                         "~/Scripts/jquery.cookie.js",
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -27,7 +28,7 @@ namespace InvoiceManager
                       "~/Content/bootstrap.css",
                       "~/Content/bootstrap-datepicker.css",
                       "~/Content/bootstrap-datepicker3.css",
-                      "~/Content/site.css"));
+                      "~/Content/Site.css"));
         }
     }
 }

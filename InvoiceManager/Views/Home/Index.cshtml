@@ -22,7 +22,7 @@
             <th scope="col">Wartość</th>
             <th scope="col">Data utworzenia</th>
             <th scope="col">Termin płatności</th>
-            <th></th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
@@ -30,21 +30,20 @@
         {
         <tr>
             <td>
-                <a href="@Url.Action("Invoice","Home", 
+                <a class="font-weight-bold"
+                   href="@Url.Action("Invoice","Home",
                         new {id=invoice.Id })">
                     @invoice.Title
                 </a>
-            @invoice.Title
             </td>
             <td>@invoice.Client.Name</td>
             <td>@invoice.Value zł</td>
             <td>@invoice.CreatedDate.ToString("dd-MM-yyyy")</td>
             <td>@invoice.PaymentDate.ToString("dd-MM-yyyy")</td>
             <td>
-                <button
-                   class="btn btn-danger btn-sm" 
-                   onclick="deleteInvoice()">
-                Usuń
+                <button class="btn btn-danger btn-sm"
+                        onclick="deleteInvoice('@invoice.Id',this)">
+                    Usuń
                 </button>
             </td>
         </tr>
@@ -62,10 +61,30 @@ else
 @section Scripts
 {
     <script type="text/javascript">
-        function deleteInvoice() {
+        function deleteInvoice(id,btn) {
 
-            if (!confirm("Czy na pewno chcesz usunąc fakturę"))
+            if (!confirm("Czy na pewno chcesz usunąc fakturę?"))
                 return;
+
+            $.ajax({
+                type: 'POST',
+                url: "@Url.Action("Delete","Home")",
+                data: {
+                    id: id
+                },
+                success: function (data) {
+                    if (data.Success) {
+                        var row = btn.parentNode.parentNode;
+                        row.parentNode.removeChild(row);
+                    } else {
+                        alert(data.Message);
+                    }
+                },
+                error: function (data) {
+                    alert(data.Message);
+                },
+                dataType: 'json'
+            });
         }
     </script>
     }

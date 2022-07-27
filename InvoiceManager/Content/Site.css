@@ -16,3 +16,21 @@
     white-space: normal;
 }
 
+.field-validation-error {
+    color: #ff3333;
+}
+
+.privacyPolicyInfo {
+    font-size: 10px;
+    position: fixed;
+    bottom: 0;
+    background-color: #464646;
+    width: 100%;
+    color: lightgray;
+    text-align: center;
+    padding: 5px 0;
+}
+
+.privacyPolicyBtn {
+    font-size: 11px;
+}

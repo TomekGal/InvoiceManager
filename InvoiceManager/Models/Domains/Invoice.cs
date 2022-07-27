@@ -28,6 +28,7 @@ namespace InvoiceManager.Models.Domains
         [Display(Name = "Data utworzenia")]
         public DateTime  CreatedDate { get; set; }
         [Display(Name = "Uwagi")]
+       
         public string Coments { get; set; }
         [Display(Name = "Klient")]
         public int ClientId { get; set; }
