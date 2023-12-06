@@ -3,6 +3,8 @@ using InvoiceManager.Models.Repositories;
 using InvoiceManager.Models.ViewModels;
 using Microsoft.AspNet.Identity;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -44,6 +46,7 @@ namespace InvoiceManager.Controllers
             };
         }
 
+      
         private Invoice GetNewInvoice(string userId)
         {
             var title = GetTitle();
@@ -225,6 +228,28 @@ namespace InvoiceManager.Controllers
             return Json(new { Success = false, Message = "Można usunąć tylko ostatnią pozycję!" });
         }
 
+        [HttpPost]
+        public ActionResult DeleteClient(int id)
+        {
+            //var userId = User.Identity.GetUserId();
+            //var clientToDelete = _clientRepository.GetClient(id);
+
+            try
+            {
+
+                _clientRepository.Delete(id);
+            }
+
+            catch (Exception exception)
+            {
+                // logowanie
+                return Json(new { Success = false, Message = exception.Message });
+            }
+
+            return Json(new { Success = true });
+        }
+   
+
 
 
         [HttpPost]
@@ -252,6 +277,53 @@ namespace InvoiceManager.Controllers
             return Json(new { Success = true, InvoiceValue = invoiceValue });
 
 
+        }
+
+        public ActionResult Clients()
+        {
+            
+            var userId = User.Identity.GetUserId();
+            var clients = _clientRepository.GetClients(userId);
+            var vmList = new List<AddEditClientViewModel>();
+
+
+            foreach (var client in clients)
+            {
+                vmList.Add(new AddEditClientViewModel
+                    {
+                    Address = _clientRepository.GetAdress(client.AddressId),
+                    Client = client,
+                   
+                });
+               
+            }
+          
+
+            return View(vmList);
+        }
+
+        public ActionResult Client()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Client(Client client)
+        {
+            var userId = User.Identity.GetUserId();
+            client.UserId = userId;
+
+            if (!ModelState.IsValid)
+            {
+                if (client.Id == 0)
+                    _clientRepository.Add(client);
+                else
+                    _clientRepository.Update(client);
+            }
+
+            
+
+            return RedirectToAction("Clients");
         }
 
 

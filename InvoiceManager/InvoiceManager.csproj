@@ -193,6 +193,7 @@
     <Compile Include="Models\Repositories\ClientRepository.cs" />
     <Compile Include="Models\Repositories\InvoiceRepository.cs" />
     <Compile Include="Models\Repositories\ProductRepository.cs" />
+    <Compile Include="Models\ViewModels\AddEditClientViewModel.cs" />
     <Compile Include="Models\ViewModels\AddPhoneNumberViewModel.cs" />
     <Compile Include="Models\Domains\ApplicationUser.cs" />
     <Compile Include="Models\ViewModels\ChangePasswordViewModel.cs" />
@@ -465,6 +466,8 @@
     <Content Include="Views\Home\InvoicePosition.cshtml" />
     <Content Include="Views\Home\InvoicePositionRefresh.cshtml" />
     <Content Include="Views\Print\InvoiceTemplate.cshtml" />
+    <Content Include="Views\Home\Clients.cshtml" />
+    <Content Include="Views\Home\Client.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
